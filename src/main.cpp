@@ -10,14 +10,14 @@ int main()
     Game game;
 
     if (!game.init(
-            "Example Game Title",
+            "Pong",
             SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
             WINDOW_WIDTH, WINDOW_HEIGHT))
     {
         throw std::runtime_error("Failed to initialise SDL");
     }
 
-    game.addEntity<Player>(Player({400, 300}, &game));
+    game.addEntity<Player>(Player({200, 400}, &game));
 
     while (game.getIsRunning())
     {

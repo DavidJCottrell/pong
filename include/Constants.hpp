@@ -6,7 +6,7 @@
 #define FPS 60
 #define FRAME_TARGET_TIME (1000 / FPS)
 
-#define WINDOW_HEIGHT 640
-#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 520
+#define WINDOW_WIDTH 400
 
 #endif // ARNOLD_CONSTANTS_H
