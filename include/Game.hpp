@@ -47,8 +47,6 @@ public:
 
     void endGame() { isRunning = false; }
 
-    std::vector<Task> tasks;
-
 private:
     Uint32 lastFrameTime = 0;
     bool isRunning = false;
