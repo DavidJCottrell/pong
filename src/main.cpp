@@ -5,6 +5,7 @@
 #include "Game.hpp"
 #include "Player.hpp"
 #include "Constants.hpp"
+#include "Opponent.hpp"
 
 int main()
 {
@@ -19,6 +20,7 @@ int main()
     }
 
     game.addEntity<Player>(Player({(WINDOW_WIDTH / 2) - 25, WINDOW_HEIGHT - 50}, &game));
+    game.addEntity<Opponent>(Opponent({(WINDOW_WIDTH / 2) - 25, 50}, &game));
 
     while (game.getIsRunning())
     {

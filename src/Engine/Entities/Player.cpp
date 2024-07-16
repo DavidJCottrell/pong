@@ -22,18 +22,6 @@ void Player::handleEvents(const SDL_Event &sdlEvent)
     }
 }
 
-void Player::render(SDL_Renderer *renderer)
-{
-    // Draw player rectangle
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    const SDL_Rect playerRect = {
-        static_cast<int>(coordinates.x),
-        static_cast<int>(coordinates.y),
-        static_cast<int>(dimensions.x),
-        static_cast<int>(dimensions.y)};
-    SDL_RenderFillRect(renderer, &playerRect);
-}
-
 void Player::update(const double deltaTime)
 {
     Vector2D moveAmount = {0.0f, 0.0f};
@@ -57,6 +45,5 @@ void Player::update(const double deltaTime)
     }
 
     moveAmount = normalise(moveAmount);
-
     coordinates.x += static_cast<float>(moveAmount.x * movementSpeed * deltaTime);
 }

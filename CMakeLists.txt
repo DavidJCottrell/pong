@@ -24,6 +24,10 @@ add_executable(Pong src/main.cpp
     include/Utils.hpp
     include/Constants.hpp
     include/Entity.hpp
+    src/Engine/Entities/Paddle.cpp
+    include/Paddle.hpp
+    src/Engine/Entities/Opponent.cpp
+    include/Opponent.hpp
     src/Engine/Entities/Player.cpp
     include/Player.hpp
 )

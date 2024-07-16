@@ -3,43 +3,26 @@
 
 #pragma once
 
-#include <Utils.hpp>
-#include <Entity.hpp>
+#include <Paddle.hpp>
 #include <SDL2/SDL.h>
 #include <thread>
 #include <vector>
 #include <map>
 
-using namespace Utils::Geometry;
-
-class Player final : public Entity
+class Player final : public Paddle
 {
 public:
-    Player(const Vector2D coordinates, Game *game) : Entity(coordinates, game, 40)
-    {
-        dimensions = {50, 5};
-    }
+    Player(const Vector2D coordinates, Game *game)
+        : Paddle(coordinates, game, {50, 5}, 150.0f) {}
 
     void registerMovementKey(SDL_Keycode key, bool isHeld);
 
     void handleEvents(const SDL_Event &sdlEvent);
 
-    void render(SDL_Renderer *renderer) override;
-
     void update(double deltaTime) override;
 
 private:
-    const int healthCapacity = 40;
-
-    const float movementSpeed = 150.0f;
-
     std::vector<SDL_Keycode> currentHeldKeys;
-
-    std::thread uziThread;
-
-    Vector2D mouseCoords{};
-
-    bool mouseHeld = false;
     std::map<SDL_Keycode, bool> movementKeys = {
         {SDLK_a, false},
         {SDLK_d, false},
