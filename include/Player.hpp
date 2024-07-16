@@ -12,19 +12,12 @@
 
 using namespace Utils::Geometry;
 
-enum WeaponType
-{
-    rifle,
-    shotgun,
-    uzi
-};
-
 class Player final : public Entity
 {
 public:
     Player(const Vector2D coordinates, Game *game) : Entity(coordinates, game, 40)
     {
-        dimensions = {20, 20};
+        dimensions = {50, 5};
     }
 
     void registerMovementKey(SDL_Keycode key, bool isHeld);
@@ -35,14 +28,10 @@ public:
 
     void update(double deltaTime) override;
 
-    WeaponType weaponType = rifle;
-
 private:
     const int healthCapacity = 40;
 
     const float movementSpeed = 150.0f;
-
-    bool isCollidingWithWall(Vector2D potentialCoordinates) const;
 
     std::vector<SDL_Keycode> currentHeldKeys;
 
@@ -52,10 +41,9 @@ private:
 
     bool mouseHeld = false;
     std::map<SDL_Keycode, bool> movementKeys = {
-        {SDLK_w, false},
         {SDLK_a, false},
-        {SDLK_s, false},
-        {SDLK_d, false}};
+        {SDLK_d, false},
+    };
 };
 
 #endif // ARNOLD_PLAYER_H

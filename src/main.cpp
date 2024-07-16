@@ -1,9 +1,10 @@
 #include <SDL2/SDL.h>
 #include <random>
-#include <Game.hpp>
-#include <Constants.hpp>
-#include <Player.hpp>
 #include <iostream>
+
+#include "Game.hpp"
+#include "Player.hpp"
+#include "Constants.hpp"
 
 int main()
 {
@@ -17,7 +18,7 @@ int main()
         throw std::runtime_error("Failed to initialise SDL");
     }
 
-    game.addEntity<Player>(Player({200, 400}, &game));
+    game.addEntity<Player>(Player({(WINDOW_WIDTH / 2) - 25, WINDOW_HEIGHT - 50}, &game));
 
     while (game.getIsRunning())
     {
