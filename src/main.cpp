@@ -12,8 +12,10 @@ int main()
 {
     Game game;
 
+    char *title = "Pong - Score: 0";
+
     if (!game.init(
-            "Pong",
+            title,
             SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
             WINDOW_WIDTH, WINDOW_HEIGHT))
     {

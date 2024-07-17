@@ -4,6 +4,7 @@
 #pragma once
 
 #include <chrono>
+#include <iostream>
 #include <memory>
 #include <vector>
 #include <SDL2/SDL.h>
@@ -46,6 +47,8 @@ public:
     [[nodiscard]] Player *getPlayer() const;
 
     void endGame() { isRunning = false; }
+
+    int score = 0;
 
 private:
     Uint32 lastFrameTime = 0;

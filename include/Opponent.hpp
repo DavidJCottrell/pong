@@ -16,7 +16,7 @@ class Opponent final : public Paddle
 {
 public:
     Opponent(const Vector2D coordinates, Game *game)
-        : Paddle(coordinates, game, {100, 5}, 100.0f) {}
+        : Paddle(coordinates, game, {100, 5}, 150.0f) {}
 
     void update(double deltaTime) override;
 

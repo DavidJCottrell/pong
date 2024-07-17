@@ -14,15 +14,8 @@ void Ball::render(SDL_Renderer *renderer)
 
 float Ball::getBounceAngle(const Vector2D &entityCoordinates, const Vector2D &entityDimensions)
 {
-    std::cout << "Ball: " << coordinates.x << " " << coordinates.y << std::endl;
-    std::cout << "Entity: " << entityCoordinates.x << " " << entityCoordinates.y << std::endl;
-
-    float angle = atan2((entityCoordinates.y + entityDimensions.y / 2) - (coordinates.y + dimensions.y / 2),
-                        (entityCoordinates.x + entityDimensions.x / 2) - (coordinates.x + dimensions.x / 2));
-
-    std::cout << "Angle?: " << angle << std::endl;
-
-    return angle;
+    return atan2((entityCoordinates.y + entityDimensions.y / 2) - (coordinates.y + dimensions.y / 2),
+                 (entityCoordinates.x + entityDimensions.x / 2) - (coordinates.x + dimensions.x / 2));
 }
 
 void Ball::handleCollision(Entity *entity)
@@ -46,6 +39,7 @@ void Ball::update(double deltaTime)
 
     Vector2D moveAmount = {0.0f, 0.0f};
 
+    // Bounce ball off the window edges
     if (coordinates.x <= 0 || coordinates.x + dimensions.x >= WINDOW_WIDTH)
     {
         xDirection = xDirection * -1.0f;
@@ -53,10 +47,16 @@ void Ball::update(double deltaTime)
 
     if (coordinates.y <= 0 || coordinates.y + dimensions.y >= WINDOW_HEIGHT)
     {
+        // Player scored
+        if (coordinates.y <= 0)
+        {
+            game->score++;
+        }
+        // Reset ball position
         yDirection = 1.0f;
         xDirection = 0.0f;
         coordinates.x = WINDOW_WIDTH / 2;
-        coordinates.y = WINDOW_HEIGHT / 2;
+        coordinates.y = 100;
     }
 
     for (const auto &entity : game->getEntities())

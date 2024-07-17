@@ -66,6 +66,9 @@ void Game::update()
 
     for (const auto &entity : entities)
         entity->update(deltaTime);
+
+    std::string title = "Pong - Score: " + std::to_string(score);
+    SDL_SetWindowTitle(window, title.c_str());
 }
 
 void Game::render()
