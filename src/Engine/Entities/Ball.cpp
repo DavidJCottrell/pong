@@ -12,7 +12,20 @@ void Ball::render(SDL_Renderer *renderer)
     SDL_RenderFillRect(renderer, &paddleRect);
 }
 
-void handleCollision(Entity *entity, const Vector2D &coordinates, const Vector2D &dimensions, float &yDirection)
+float Ball::getBounceAngle(const Vector2D &entityCoordinates, const Vector2D &entityDimensions)
+{
+    std::cout << "Ball: " << coordinates.x << " " << coordinates.y << std::endl;
+    std::cout << "Entity: " << entityCoordinates.x << " " << entityCoordinates.y << std::endl;
+
+    float angle = atan2((entityCoordinates.y + entityDimensions.y / 2) - (coordinates.y + dimensions.y / 2),
+                        (entityCoordinates.x + entityDimensions.x / 2) - (coordinates.x + dimensions.x / 2));
+
+    std::cout << "Angle?: " << angle << std::endl;
+
+    return angle;
+}
+
+void Ball::handleCollision(Entity *entity)
 {
     if (isColliding(coordinates, dimensions, entity->coordinates, entity->dimensions))
     {
@@ -24,14 +37,24 @@ void handleCollision(Entity *entity, const Vector2D &coordinates, const Vector2D
         {
             yDirection = 1.0f;
         }
+        xDirection = getBounceAngle(entity->coordinates, entity->dimensions);
     }
 }
 
 void Ball::update(double deltaTime)
 {
 
+    Vector2D moveAmount = {0.0f, 0.0f};
+
+    if (coordinates.x <= 0 || coordinates.x + dimensions.x >= WINDOW_WIDTH)
+    {
+        xDirection = xDirection * -1.0f;
+    }
+
     if (coordinates.y <= 0 || coordinates.y + dimensions.y >= WINDOW_HEIGHT)
     {
+        yDirection = 1.0f;
+        xDirection = 0.0f;
         coordinates.x = WINDOW_WIDTH / 2;
         coordinates.y = WINDOW_HEIGHT / 2;
     }
@@ -40,9 +63,18 @@ void Ball::update(double deltaTime)
     {
         if (entity)
         {
-            handleCollision(entity.get(), coordinates, dimensions, yDirection);
+            if (dynamic_cast<Paddle *>(entity.get()))
+            {
+                handleCollision(entity.get());
+            }
         }
     }
 
-    coordinates.y += static_cast<float>(yDirection * movementSpeed * deltaTime);
+    moveAmount.x = xDirection;
+    moveAmount.y = yDirection;
+
+    moveAmount = normalise(moveAmount);
+
+    coordinates.x += static_cast<float>(moveAmount.x * movementSpeed * deltaTime);
+    coordinates.y += static_cast<float>(moveAmount.y * movementSpeed * deltaTime);
 }
