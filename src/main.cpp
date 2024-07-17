@@ -12,7 +12,7 @@ int main()
 {
     Game game;
 
-    char *title = "Pong - Score: 0";
+    const char *title = "Pong - Score: 0";
 
     if (!game.init(
             title,

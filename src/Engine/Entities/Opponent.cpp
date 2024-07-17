@@ -2,6 +2,7 @@
 
 void Opponent::update(double deltaTime)
 {
+    // TODO: This is also wonky
 
     for (const auto &entity : game->getEntities())
     {

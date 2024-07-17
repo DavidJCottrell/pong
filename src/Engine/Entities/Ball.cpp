@@ -14,6 +14,7 @@ void Ball::render(SDL_Renderer *renderer)
 
 float Ball::getBounceAngle(const Vector2D &entityCoordinates, const Vector2D &entityDimensions)
 {
+    // TODO: This is wonky
     return atan2((entityCoordinates.y + entityDimensions.y / 2) - (coordinates.y + dimensions.y / 2),
                  (entityCoordinates.x + entityDimensions.x / 2) - (coordinates.x + dimensions.x / 2));
 }
