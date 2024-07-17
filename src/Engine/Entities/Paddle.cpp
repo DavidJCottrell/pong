@@ -14,5 +14,4 @@ void Paddle::render(SDL_Renderer *renderer)
 
 void Paddle::update(double deltaTime)
 {
-    // Implementation for update will be in derived classes
 }

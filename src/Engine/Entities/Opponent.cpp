@@ -2,6 +2,20 @@
 
 void Opponent::update(double deltaTime)
 {
+
+    for (const auto &entity : game->getEntities())
+    {
+        if (entity)
+        {
+            if (Ball *ball = dynamic_cast<Ball *>(entity.get()))
+            {
+                Vector2D moveAmount = {ball->xDirection, 0.0f};
+                moveAmount = normalise(moveAmount);
+                xDirection = moveAmount.x;
+            }
+        }
+    }
+
     // Change direction when the paddle hits the borders
     if (coordinates.x + dimensions.x >= WINDOW_WIDTH)
     {

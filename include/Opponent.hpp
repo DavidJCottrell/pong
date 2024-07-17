@@ -7,8 +7,10 @@
 #include <thread>
 #include <vector>
 #include <map>
+
 #include "Paddle.hpp"
 #include "Constants.hpp"
+#include "Ball.hpp"
 
 class Opponent final : public Paddle
 {

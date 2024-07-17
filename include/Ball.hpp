@@ -27,9 +27,11 @@ public:
 
     void update(double deltaTime) override;
 
+    float xDirection = 0.0f;
+
 private:
     float yDirection = 1.0f;
-    float xDirection = 0.0f;
+
     float getBounceAngle(const Vector2D &entityCoordinates, const Vector2D &entityDimensions);
     void handleCollision(Entity *entity);
 
